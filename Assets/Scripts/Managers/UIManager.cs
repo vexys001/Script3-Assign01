@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour
     static UIManager instance;
 
     [SerializeField] private TextMeshProUGUI _healthText;
-    [SerializeField] private TextMeshProUGUI _gameOverText;
+    [SerializeField] private TextMeshProUGUI _scoreText;
 
     public static UIManager Instance
     {
@@ -40,5 +40,14 @@ public class UIManager : MonoBehaviour
             instance._healthText = GameObject.Find("HealthText").GetComponent<TextMeshProUGUI>();
         }
         _healthText.text = "Health: " + _healthValue;
+    }
+
+    public void ModifyScore(int _scoreValue)
+    {
+        if (!_scoreText)
+        {
+            instance._scoreText = GameObject.Find("ScoreText").GetComponent<TextMeshProUGUI>();
+        }
+        _scoreText.text = "Score: " + _scoreValue;
     }
 }

@@ -41,6 +41,9 @@ public class EncounterManager : MonoBehaviour
     public void KilledEnemy()
     {
         _enemyNum--;
+
+        GameManager.Instance.AddScore(25);
+
         if (_enemyNum <= 0)
         {
             _exit.SetActive(false);

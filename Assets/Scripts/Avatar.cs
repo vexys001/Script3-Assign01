@@ -211,6 +211,6 @@ public class Avatar : MonoBehaviour
 
     private void Die()
     {
-        GameManager.Instance.LoadNextScene("GameOverLost", _health);
+        GameManager.Instance.LoadDeathScreen();
     }
 }

@@ -7,7 +7,14 @@ public class GameManager : MonoBehaviour
 {
     static GameManager instance;
 
-    private int _remainingHealth = 100;
+    private int _remainingHealth;
+
+    //Reload
+    private string _lastScene;
+
+    //Stats
+    private int _score = 0;
+    private int _deaths = 0;
 
     public static GameManager Instance
     {
@@ -25,6 +32,8 @@ public class GameManager : MonoBehaviour
     }
 
     public int RemainingHealth { get => _remainingHealth; set => _remainingHealth = value; }
+    public int Score { get => _score; set => _score = value; }
+    public int Deaths { get => _deaths; set => _deaths = value; }
 
     private void Awake()
     {
@@ -38,5 +47,27 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
         _remainingHealth = health;
+
+        _lastScene = sceneName;
+    }
+
+    public void LoadDeathScreen()
+    {
+        SceneManager.LoadScene("Death", LoadSceneMode.Single);
+        _deaths++;
+    }
+
+    public void ReloadLastScene()
+    {
+        SceneManager.LoadScene(_lastScene, LoadSceneMode.Single);
+
+        _score -= 100;
+        _remainingHealth = 100;
+    }
+
+    public void AddScore(int added)
+    {
+        _score += added;
+        UIManager.Instance.ModifyScore(_score);
     }
 }
